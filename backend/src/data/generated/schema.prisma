@@ -1,0 +1,47 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/data/generated"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./sqlite.db"
+}
+
+model Show {
+  id       Int       @id @default(autoincrement())
+  title    String
+  episodes Episode[]
+  watched  Watched[]
+}
+
+model Episode {
+  id      Int       @id @default(autoincrement())
+  showId  Int
+  title   String
+  show    Show      @relation(fields: [showId], references: [id], onDelete: Cascade)
+  watched Watched[]
+
+  @@index([showId])
+}
+
+model User {
+  id       Int       @id @default(autoincrement())
+  username String    @unique
+  watched  Watched[]
+}
+
+model Watched {
+  id        Int     @id @default(autoincrement())
+  userId    Int
+  showId    Int
+  episodeId Int
+  user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  show      Show    @relation(fields: [showId], references: [id], onDelete: Cascade)
+  episode   Episode @relation(fields: [episodeId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, episodeId])
+  @@index([userId])
+  @@index([showId])
+  @@index([episodeId])
+}

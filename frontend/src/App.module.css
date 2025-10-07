@@ -1,0 +1,14 @@
+.appContainer {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.page {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  place-items: center;
+  margin: 0 auto;
+}
