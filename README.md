@@ -1,5 +1,24 @@
 # Show Tracker
 
+## Try It Out
+
+- Clone the project
+```
+git clone <repository_url> progress-tracker
+```
+- Install dependencies
+```
+npm install
+```
+- Start front and back services
+```
+cd progress-tracker && npm run dev
+```
+- Open the project in the browser
+```
+http://localhost:5173/
+```
+
 ## Tech Stack
 
 - TypeScript
