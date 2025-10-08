@@ -8,11 +8,11 @@ git clone <repository_url> progress-tracker
 ```
 - Install dependencies
 ```
-npm install
+cd progress-tracker && npm install
 ```
 - Start front and back services
 ```
-cd progress-tracker && npm run dev
+npm run dev
 ```
 - Open the project in the browser
 ```
