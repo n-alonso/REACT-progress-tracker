@@ -2,16 +2,17 @@ import express from 'express';
 import helmet from 'helmet';
 import cors from 'cors';
 
-import { errorHandlerMiddleware, notFoundMiddleware } from './middlwares';
-import { healthRoute } from './routes/health';
-import { showRoute, usersRoute } from './routes';
-import { watchedsRoute } from './routes/watcheds';
+import { errorHandlerMiddleware, notFoundMiddleware } from './middlewares';
+import { healthRoute, showRoute, usersRoute, watchedsRoute } from './routes';
 
 const app = express();
 
 // Middlewares
 app.use(helmet());
-app.use(cors());
+app.use(cors({
+    origin: 'http://localhost:5173',
+    credentials: true,
+}));
 app.use(express.json());
 
 // Routes

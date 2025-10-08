@@ -1,5 +1,7 @@
+import type { Watched } from "./Watched.type";
+
 export type User = {
   id: number,
   username: string,
-  watchedIds: number[],
+  watcheds: Watched[],
 }

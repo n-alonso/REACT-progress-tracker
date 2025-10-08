@@ -1,6 +1,6 @@
 import { Router, Request, Response, NextFunction } from "express";
 import createError from "http-errors";
-import { prismaClient, type Show } from "../data";
+import { prismaClient } from "../data";
 
 const showRoute = Router();
 
