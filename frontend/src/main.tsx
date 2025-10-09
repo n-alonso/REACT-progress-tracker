@@ -6,7 +6,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 import App from './App.tsx';
 import { AuthProvider } from './contexts';
-import { HomePage, ShowsPage, ShowDetailsPage } from './pages';
+import { HomePage, ShowsPage, ShowDetailsPage, ProfilePage } from './pages';
 
 import './index.css';
 
@@ -31,8 +31,8 @@ createRoot(document.getElementById('root')!).render(
               <Route path="home" element={<HomePage />} />
               <Route path="shows" element={<ShowsPage />} />
               <Route path="shows/:id" element={<ShowDetailsPage />} />
+              <Route path="profile" element={<ProfilePage />} />
 
-              <Route path="not-implemented" element={<h1>Not Implemented</h1>} />
               <Route path="*" element={<h1>404 - Page Not Found</h1>} />
             </Route>
           </Routes>

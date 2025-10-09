@@ -12,7 +12,7 @@ export function Header() {
                     <Link to="/shows" className={styles.link}>Shows</Link>
                 </Group>
                 <Group>
-                    <Link to="not-implemented" className={styles.link}>Profile</Link>
+                    <Link to="/profile" className={styles.link}>Profile</Link>
                 </Group>
             </Container>
         </header>
