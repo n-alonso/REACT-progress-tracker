@@ -1,10 +1,13 @@
 import express from 'express';
 import helmet from 'helmet';
 import cors from 'cors';
+import morgan from 'morgan';
 
 import { errorHandlerMiddleware, notFoundMiddleware } from './middlewares';
-import { healthRoute, showRoute, usersRoute, watchedsRoute } from './routes';
+import { healthRouter, showsRouter, usersRouter, watchedsRouter } from './features';
+import { createLogger } from './utils/logger';
 
+const logger = createLogger('Server');
 const app = express();
 
 // Middlewares
@@ -13,17 +16,22 @@ app.use(cors({
     origin: 'http://localhost:5173',
     credentials: true,
 }));
+app.use(morgan(process.env.NODE_ENV === 'production' ? 'combined' : 'dev'));
 app.use(express.json());
 
 // Routes
-app.get('/health', healthRoute);
-app.use('/shows', showRoute);
-app.use('/users', usersRoute);
-app.use('/watcheds', watchedsRoute);
+app.use('/health', healthRouter);
+app.use('/shows', showsRouter);
+app.use('/users', usersRouter);
+app.use('/watcheds', watchedsRouter);
 
 // Error Handling
 app.use('*', notFoundMiddleware);
 app.use(errorHandlerMiddleware);
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Listening on http://localhost:${PORT}`));
+export { app };
+
+if (process.env.NODE_ENV !== 'test') {
+    const PORT = process.env.PORT || 3000;
+    app.listen(PORT, () => logger.info(`Server listening on http://localhost:${PORT}`, { port: PORT }));
+}
