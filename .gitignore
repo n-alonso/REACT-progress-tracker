@@ -7,6 +7,10 @@ backend/node_modules/
 frontend/dist/
 backend/dist/
 
+# Test coverage
+coverage/
+backend/coverage/
+
 # SQLite Database Files
 *.db
 *.db-journal
@@ -18,6 +22,7 @@ backend/dist/
 .env.local
 .env.production
 .env.development
+.env.test
 
 # Logs
 *.log
