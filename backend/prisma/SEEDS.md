@@ -4,14 +4,14 @@ This document describes the test data seeded into the database for development a
 
 ## Running Seeds
 
-### Manual Seeding
+### Seeding
+Manually:
 ```bash
 cd backend
 npm run prisma:seed
 ```
 
-### Auto-seeding (after migrations)
-Seeds will run automatically after running:
+Or automatically after migration:
 ```bash
 npm run prisma:migrate
 ```
@@ -28,23 +28,23 @@ npm run prisma:migrate
 
 ### Shows (15 total)
 
-| Show Title | Episodes | Genre/Type |
-|-----------|----------|------------|
-| Berserk | 25 | Dark Fantasy |
-| Cowboy Bebop | 26 | Sci-Fi |
-| Death Note | 37 | Thriller |
-| One Piece | 50 | Adventure (simplified) |
-| Attack on Titan | 75 | Action |
-| Fullmetal Alchemist: Brotherhood | 64 | Adventure |
-| Steins;Gate | 24 | Sci-Fi |
-| One Punch Man | 24 | Action/Comedy |
-| Demon Slayer | 44 | Action |
-| Naruto | 220 | Adventure |
-| Hunter x Hunter | 148 | Adventure |
-| My Hero Academia | 113 | Superhero |
-| Samurai Champloo | 26 | Action |
-| Mob Psycho 100 | 25 | Action/Comedy |
-| Code Geass | 50 | Mecha |
+| Show Title | Episodes |
+|-----------|----------|
+| Berserk | 25 |
+| Cowboy Bebop | 26 |
+| Death Note | 37 |
+| One Piece | 50 |
+| Attack on Titan | 75 |
+| Fullmetal Alchemist: Brotherhood | 64 |
+| Steins;Gate | 24 |
+| One Punch Man | 24 |
+| Demon Slayer | 44 |
+| Naruto | 220 |
+| Hunter x Hunter | 148 |
+| My Hero Academia | 113 |
+| Samurai Champloo | 26 |
+| Mob Psycho 100 | 25 |
+| Code Geass | 50 |
 
 **Total Episodes:** 951
 
@@ -78,51 +78,6 @@ npm run prisma:migrate
 - Demon Slayer (30/44 episodes - 68%)
 - Naruto (50/220 episodes - 23%)
 
-## Testing Scenarios
-
-The seeded data provides various testing scenarios:
-
-### 1. Completed Shows
-- Test user seeing 100% progress
-- Test completion badges/indicators
-- Test "rewatch" functionality
-
-### 2. Partially Watched Shows
-- Test progress tracking
-- Test "continue watching" functionality
-- Test various completion percentages
-
-### 3. Unwatched Shows
-- Test discovery of new shows
-- Test starting a new show
-- Test empty progress states
-
-### 4. Multiple Users
-- Test user-specific progress
-- Test that users don't see each other's progress
-- Test user switching
-
-## API Testing Examples
-
-### Get All Shows
-```bash
-curl http://localhost:3000/shows
-```
-
-### Get User's Watched Episodes
-```bash
-# john_doe's watched episodes
-curl http://localhost:3000/watcheds?userId=1
-
-# jane_smith's watched episodes for Attack on Titan
-curl "http://localhost:3000/watcheds?userId=2&showId=5"
-```
-
-### Get Specific User
-```bash
-curl http://localhost:3000/users/1
-```
-
 ## Database Statistics
 
 After seeding:
@@ -130,7 +85,6 @@ After seeding:
 - **Shows:** 15
 - **Episodes:** 951
 - **Watched Records:** 232
-- **Average Completion per User:** ~77 episodes
 
 ## Resetting the Database
 
@@ -145,15 +99,6 @@ npm run prisma:migrate reset
 # 3. Run seeds automatically
 ```
 
-Or manually:
-```bash
-# Clear data
-npx prisma migrate reset --skip-seed
-
-# Run seeds
-npm run prisma:seed
-```
-
 ## Customizing Seeds
 
 To add more data, edit `prisma/seed.ts`:
@@ -163,18 +108,7 @@ To add more data, edit `prisma/seed.ts`:
 3. **Add more watched records:** Add entries to the user watcheds arrays
 4. **Adjust episode counts:** Modify `episodeCount` in show data
 
-Example:
-```typescript
-{
-  title: 'Your New Show',
-  episodeCount: 12,
-}
-```
-
 ## Notes
 
-- Episode titles are simplified as "Episode 1", "Episode 2", etc.
-- One Piece episode count is reduced from 1000+ to 50 for testing
 - Watched records maintain proper relationships with unique constraints
 - Seeds are idempotent (safe to run multiple times)
-
