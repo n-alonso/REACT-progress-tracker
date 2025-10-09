@@ -2,6 +2,7 @@ import { prismaClient } from '../data/prismaClient';
 import { execSync } from 'child_process';
 import * as dotenv from 'dotenv';
 import * as path from 'path';
+import * as fs from 'fs';
 
 // Load environment variables (load .env first, then .env.test overrides)
 dotenv.config({ path: path.resolve(__dirname, '../../.env') });
@@ -33,5 +34,17 @@ afterEach(async () => {
 
 afterAll(async () => {
     await prismaClient.$disconnect();
+
+    // Delete test database file
+    const testDbPath = path.resolve(__dirname, '../../prisma/test.db');
+    if (fs.existsSync(testDbPath)) {
+        fs.unlinkSync(testDbPath);
+    }
+
+    // Also clean up any SQLite journal files
+    const journalPath = `${testDbPath}-journal`;
+    if (fs.existsSync(journalPath)) {
+        fs.unlinkSync(journalPath);
+    }
 });
 
