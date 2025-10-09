@@ -2,7 +2,7 @@ import { prismaClient } from '../../data';
 
 export class WatchedsRepository {
     async findByUserId(userId: number, showId?: number) {
-        return await prismaClient.watched.findMany({
+        return await prismaClient.watchedEpisode.findMany({
             where: {
                 userId,
                 ...(showId && { showId }),

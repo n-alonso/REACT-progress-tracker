@@ -22,8 +22,8 @@ beforeAll(async () => {
 
 afterEach(async () => {
     // Clean up database tables in correct order (foreign keys)
-    // Watched references User, Show, and Episode - delete first
-    await prismaClient.watched.deleteMany();
+    // WatchedEpisode references User, Show, and Episode - delete first
+    await prismaClient.watchedEpisode.deleteMany();
     // Episodes reference Show - delete before Show
     await prismaClient.episode.deleteMany();
     // Shows and Users have no dependencies

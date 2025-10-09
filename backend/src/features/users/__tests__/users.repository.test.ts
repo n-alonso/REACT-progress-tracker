@@ -20,6 +20,7 @@ describe('UsersRepository', () => {
             expect(user).toMatchObject({
                 id: createdUser.id,
                 username: 'jane_doe',
+                watchedEpisodes: [],
             });
         });
 

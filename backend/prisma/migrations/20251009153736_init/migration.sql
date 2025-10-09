@@ -19,14 +19,14 @@ CREATE TABLE "User" (
 );
 
 -- CreateTable
-CREATE TABLE "Watched" (
+CREATE TABLE "WatchedEpisode" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     "userId" INTEGER NOT NULL,
     "showId" INTEGER NOT NULL,
     "episodeId" INTEGER NOT NULL,
-    CONSTRAINT "Watched_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User" ("id") ON DELETE CASCADE ON UPDATE CASCADE,
-    CONSTRAINT "Watched_showId_fkey" FOREIGN KEY ("showId") REFERENCES "Show" ("id") ON DELETE CASCADE ON UPDATE CASCADE,
-    CONSTRAINT "Watched_episodeId_fkey" FOREIGN KEY ("episodeId") REFERENCES "Episode" ("id") ON DELETE CASCADE ON UPDATE CASCADE
+    CONSTRAINT "WatchedEpisode_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User" ("id") ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT "WatchedEpisode_showId_fkey" FOREIGN KEY ("showId") REFERENCES "Show" ("id") ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT "WatchedEpisode_episodeId_fkey" FOREIGN KEY ("episodeId") REFERENCES "Episode" ("id") ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 -- CreateIndex
@@ -36,13 +36,13 @@ CREATE INDEX "Episode_showId_idx" ON "Episode"("showId");
 CREATE UNIQUE INDEX "User_username_key" ON "User"("username");
 
 -- CreateIndex
-CREATE INDEX "Watched_userId_idx" ON "Watched"("userId");
+CREATE INDEX "WatchedEpisode_userId_idx" ON "WatchedEpisode"("userId");
 
 -- CreateIndex
-CREATE INDEX "Watched_showId_idx" ON "Watched"("showId");
+CREATE INDEX "WatchedEpisode_showId_idx" ON "WatchedEpisode"("showId");
 
 -- CreateIndex
-CREATE INDEX "Watched_episodeId_idx" ON "Watched"("episodeId");
+CREATE INDEX "WatchedEpisode_episodeId_idx" ON "WatchedEpisode"("episodeId");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Watched_userId_episodeId_key" ON "Watched"("userId", "episodeId");
+CREATE UNIQUE INDEX "WatchedEpisode_userId_episodeId_key" ON "WatchedEpisode"("userId", "episodeId");

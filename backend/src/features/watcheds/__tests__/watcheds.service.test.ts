@@ -24,7 +24,7 @@ describe('WatchedsService', () => {
                 include: { episodes: true },
             });
 
-            await prismaClient.watched.create({
+            await prismaClient.watchedEpisode.create({
                 data: {
                     userId: user.id,
                     showId: show.id,
@@ -67,7 +67,7 @@ describe('WatchedsService', () => {
                 include: { episodes: true },
             });
 
-            await prismaClient.watched.createMany({
+            await prismaClient.watchedEpisode.createMany({
                 data: [
                     {
                         userId: user.id,

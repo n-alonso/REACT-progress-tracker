@@ -47,7 +47,7 @@ describe('Watcheds Routes', () => {
             });
 
             // Mark episodes as watched
-            await prismaClient.watched.createMany({
+            await prismaClient.watchedEpisode.createMany({
                 data: [
                     {
                         userId: user.id,
@@ -110,7 +110,7 @@ describe('Watcheds Routes', () => {
             });
 
             // Watch episodes from both shows
-            await prismaClient.watched.createMany({
+            await prismaClient.watchedEpisode.createMany({
                 data: [
                     {
                         userId: user.id,

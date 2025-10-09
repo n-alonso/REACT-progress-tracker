@@ -12,7 +12,7 @@ async function main() {
 
     // Clear existing data
     logger.info('Cleaning existing data');
-    await prisma.watched.deleteMany();
+    await prisma.watchedEpisode.deleteMany();
     await prisma.episode.deleteMany();
     await prisma.show.deleteMany();
     await prisma.user.deleteMany();
@@ -50,7 +50,7 @@ async function main() {
         },
         {
             title: 'One Piece',
-            episodeCount: 50, // Simplified from 1000+
+            episodeCount: 50,
         },
         {
             title: 'Attack on Titan',
@@ -122,11 +122,11 @@ async function main() {
 
     logger.info(`Created ${shows.length} shows`);
 
-    // Create Watched Records (User Progress)
-    logger.info('Creating watched records');
+    // Create WatchedEpisode Records (User Progress)
+    logger.info('Creating watched episodes');
 
     // User 1 (john_doe) - Has watched some episodes from multiple shows
-    const user1Watcheds = [
+    const user1WatchedEpisodes = [
         // Watched all of Cowboy Bebop
         ...shows[1].episodes.map(ep => ({
             userId: users[0].id,
@@ -148,7 +148,7 @@ async function main() {
     ];
 
     // User 2 (jane_smith) - Different viewing progress
-    const user2Watcheds = [
+    const user2WatchedEpisodes = [
         // Watched all of Steins;Gate
         ...shows[6].episodes.map(ep => ({
             userId: users[1].id,
@@ -170,7 +170,7 @@ async function main() {
     ];
 
     // User 3 (anime_fan) - Heavy watcher
-    const user3Watcheds = [
+    const user3WatchedEpisodes = [
         // Watched all of One Punch Man
         ...shows[7].episodes.map(ep => ({
             userId: users[2].id,
@@ -197,13 +197,13 @@ async function main() {
         })),
     ];
 
-    const allWatcheds = [...user1Watcheds, ...user2Watcheds, ...user3Watcheds];
+    const allWatchedEpisodes = [...user1WatchedEpisodes, ...user2WatchedEpisodes, ...user3WatchedEpisodes];
 
-    await prisma.watched.createMany({
-        data: allWatcheds,
+    await prisma.watchedEpisode.createMany({
+        data: allWatchedEpisodes,
     });
 
-    logger.info(`Created ${allWatcheds.length} watched records`);
+    logger.info(`Created ${allWatchedEpisodes.length} watched episodes`);
 
     // Summary
     const totalEpisodes = shows.reduce((sum, show) => sum + show.episodes.length, 0);
@@ -211,7 +211,7 @@ async function main() {
         users: users.length,
         shows: shows.length,
         episodes: totalEpisodes,
-        watchedRecords: allWatcheds.length,
+        watchedEpisodeRecords: allWatchedEpisodes.length,
     });
 }
 
@@ -223,4 +223,3 @@ main()
     .finally(async () => {
         await prisma.$disconnect();
     });
-
