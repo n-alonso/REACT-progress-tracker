@@ -1,4 +1,4 @@
-export type Watched = {
+export type WatchedEpisode = {
   id: number,
   userId: number,
   showId: number,

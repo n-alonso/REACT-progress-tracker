@@ -2,17 +2,17 @@ import { Modal, Text, RingProgress, useMantineTheme, Group, UnstyledButton } fro
 import { Link } from "react-router";
 
 import { useAuth } from "../../../contexts";
-import { type Show, useWatcheds } from "../../../data";
+import { type Show, useWatchedEpisodes } from "../../../data";
 
 import styles from './ShowModal.module.css';
 
 type ShowModalProps = {
     show: Show | null,
-    isOpened: boolean,
-    onCloseHandler: () => void
+    isOpen: boolean,
+    onClose: () => void
 }
 
-export function ShowModal({ show, isOpened, onCloseHandler }: ShowModalProps) {
+export function ShowModal({ show, isOpen, onClose }: ShowModalProps) {
     if (!show) return null;
 
     const theme = useMantineTheme();
@@ -22,19 +22,19 @@ export function ShowModal({ show, isOpened, onCloseHandler }: ShowModalProps) {
     if (isError) return <h1>Error: {error?.message}</h1>;
     if (!user) return <h1>User not found.</h1>;
 
-    const { data: watcheds, isLoading: isLoadingWatcheds, isError: isErrorWatcheds, error: errorWatcheds } = useWatcheds(user.id, show.id);
-    if (isLoadingWatcheds) return <h1>Loading Watcheds...</h1>;
-    if (isErrorWatcheds) return <h1>Error: {errorWatcheds.message}</h1>;
-    if (!watcheds) return <h1>Watcheds not found.</h1>;
+    const { data: watchedEpisodes, isLoading: isLoadingWatchedEpisodes, isError: isErrorWatchedEpisodes, error: errorWatchedEpisodes } = useWatchedEpisodes(user.id, show.id);
+    if (isLoadingWatchedEpisodes) return <h1>Loading Watched Episodes...</h1>;
+    if (isErrorWatchedEpisodes) return <h1>Error: {errorWatchedEpisodes.message}</h1>;
+    if (!watchedEpisodes) return <h1>Watched Episodes not found.</h1>;
 
     const title = show.title;
-    const completed: number = watcheds.length;
+    const completed: number = watchedEpisodes.length;
     const total: number = show.episodes.length;
 
     return (
         <Modal
-            opened={isOpened}
-            onClose={onCloseHandler}
+            opened={isOpen}
+            onClose={onClose}
             title="Tracking Details"
             centered
             padding="xl"

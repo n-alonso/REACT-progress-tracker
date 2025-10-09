@@ -12,7 +12,12 @@ type AuthContextType = {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-    const USER_ID = 2; // Hardcoded for now
+    // Validate Environment Variables
+    if (!import.meta.env.VITE_USER_ID) {
+        throw new Error('VITE_USER_ID environment variable is not set');
+    }
+
+    const USER_ID = Number(import.meta.env.VITE_USER_ID);
     const { data: user, isLoading, isError, error } = useUser(USER_ID);
 
     return (
@@ -27,5 +32,3 @@ export function useAuth() {
     if (!context) throw new Error('useAuth must be used within an AuthProvider');
     return context;
 }
-
-

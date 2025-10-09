@@ -10,7 +10,7 @@ import styles from './ShowsPage.module.css';
 export function ShowsPage() {
     const { data, isLoading, isError, error } = useShows();
     const [selectedShow, setSelectedShow] = useState<Show | null>(null);
-    const [isOpened, { open, close }] = useDisclosure(false);
+    const [isOpen, { open, close }] = useDisclosure(false);
     const [inputValue, setInputValue] = useState("");
     const [searchQuery, setSearchQuery] = useState("");
 
@@ -24,7 +24,7 @@ export function ShowsPage() {
 
     const shows = (data || [])
         .filter(show => show.title.toLowerCase().includes(searchQuery.toLowerCase()))
-        .map(show => <ShowComponent key={show.id} title={show.title} clickHandler={() => handleShowClick(show)} />);
+        .map(show => <ShowComponent key={show.id} title={show.title} onClick={() => handleShowClick(show)} />);
 
     return (
         <div>
@@ -49,7 +49,7 @@ export function ShowsPage() {
                 </div>
             </Card>
 
-            <ShowModal show={selectedShow} isOpened={isOpened} onCloseHandler={close} />
+            <ShowModal show={selectedShow} isOpen={isOpen} onClose={close} />
         </div>
     );
 }

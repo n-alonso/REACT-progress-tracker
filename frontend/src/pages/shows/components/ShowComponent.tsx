@@ -5,13 +5,13 @@ import styles from './ShowComponent.module.css';
 
 type ShowProps = {
     title: string,
-    clickHandler: MouseEventHandler<HTMLButtonElement>
+    onClick: MouseEventHandler<HTMLButtonElement>
 }
 
-export function ShowComponent({ title, clickHandler }: ShowProps) {
+export function ShowComponent({ title, onClick }: ShowProps) {
     return (
         <UnstyledButton
-            onClick={clickHandler}
+            onClick={onClick}
             className={styles.item}
             c="white"
             bg="var(--mantine-color-blue-filled)"
