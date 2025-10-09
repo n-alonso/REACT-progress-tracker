@@ -2,7 +2,6 @@
 
 ## Table of Contents
 
-- [Installation](#installation)
 - [Tech Stack](#tech-stack)
 - [Project Structure](#project-structure)
 - [Available Scripts](#available-scripts)
@@ -10,33 +9,6 @@
 - [Adding New Features](#adding-new-features)
 - [Testing](#testing)
 - [Next Steps](#next-steps)
-
-## Installation
-
-### 1. Install Dependencies
-```bash
-npm install
-```
-
-### 2. Generate Prisma Client
-```bash
-npm run prisma:generate
-```
-
-### 3. Run Migrations
-```bash
-npm run prisma:migrate
-```
-
-### 4. Seed the Database
-```bash
-npm run prisma:seed
-```
-
-This will create:
-- 3 users (john_doe, jane_smith, anime_fan)
-- 15 shows with a total of 951 episodes
-- 232 watched records showing user progress
 
 ## Tech Stack
 
@@ -155,14 +127,7 @@ src/features/shows/
       └── shows.service.test.ts
 ```
 
-### Test Database
-
-Tests use a separate `test.db` database:
-- Created automatically on first test run
-- Cleaned after each test (all tables truncated)
-- Migrations run automatically via `beforeAll` hook
-
 ## Next Steps
 
-3. Adding DTOs for validation
-4. Adding Authentication
+1. Adding DTOs for validation
+2. Adding Authentication
