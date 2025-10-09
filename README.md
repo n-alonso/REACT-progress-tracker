@@ -21,6 +21,7 @@ http://localhost:5173/
 
 ## Tech Stack
 
+**Language:**
 - TypeScript
 
 **Frontend:**
