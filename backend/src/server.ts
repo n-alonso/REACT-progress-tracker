@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import express from 'express';
 import helmet from 'helmet';
 import cors from 'cors';
@@ -9,6 +10,12 @@ import { createLogger } from './utils/logger';
 
 const logger = createLogger('Server');
 const app = express();
+
+// Validate Environment Variables
+if (!process.env.DATABASE_URL) {
+    logger.error('ERROR: DATABASE_URL environment variable is not set');
+    process.exit(1);
+}
 
 // Middlewares
 app.use(helmet());
