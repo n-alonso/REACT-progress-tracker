@@ -23,8 +23,9 @@ app.use(cors({
     origin: process.env.FRONTEND_URL,
     credentials: true,
 }));
-app.use(morgan(process.env.NODE_ENV === 'production' ? 'combined' : 'dev'));
 app.use(express.json());
+if (process.env.NODE_ENV !== 'test')
+    app.use(morgan(process.env.NODE_ENV === 'production' ? 'combined' : 'dev'));
 
 // Routes
 app.use('/health', healthRouter);
