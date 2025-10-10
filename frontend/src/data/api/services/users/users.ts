@@ -1,5 +1,5 @@
-import { apiClient } from "../client";
-import type { User } from "../..";
+import { apiClient } from "../../client";
+import type { User } from "../../..";
 
 export const usersApi = {
     getById: async (id: number): Promise<User> => {

@@ -1,5 +1,5 @@
-import { apiClient } from "../client";
-import type { WatchedEpisode } from "../..";
+import { apiClient } from "../../client";
+import type { WatchedEpisode } from "../../..";
 
 export const watchedEpisodesApi = {
     getByUser: async (userId: number, showId?: number): Promise<WatchedEpisode[]> => {

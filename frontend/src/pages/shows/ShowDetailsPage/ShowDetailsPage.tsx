@@ -1,10 +1,10 @@
 import { Card, Group, Text } from "@mantine/core";
 import { useParams } from "react-router";
 
-import { ShowDetails } from "./components";
-import { useShow } from "../../data";
+import { ShowDetails } from "../components";
+import { useShow } from "../../../data";
 
-import styles from './ShowsPage.module.css';
+import styles from './ShowDetailsPage.module.css';
 
 export function ShowDetailsPage() {
     const { id } = useParams();

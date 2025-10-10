@@ -1,8 +1,8 @@
 import { Modal, Text, RingProgress, useMantineTheme, Group, UnstyledButton } from "@mantine/core";
 import { Link } from "react-router";
 
-import { useAuth } from "../../../contexts";
-import { type Show, useWatchedEpisodes } from "../../../data";
+import { useAuth } from "../../../../contexts";
+import { type Show, useWatchedEpisodes } from "../../../../data";
 
 import styles from './ShowModal.module.css';
 
@@ -13,16 +13,16 @@ type ShowModalProps = {
 }
 
 export function ShowModal({ show, isOpen, onClose }: ShowModalProps) {
+    const theme = useMantineTheme();
+    const { user, isLoading, isError, error } = useAuth();
+    const { data: watchedEpisodes, isLoading: isLoadingWatchedEpisodes, isError: isErrorWatchedEpisodes, error: errorWatchedEpisodes } = useWatchedEpisodes(user?.id ?? 0, show?.id ?? 0);
+
     if (!show) return null;
 
-    const theme = useMantineTheme();
-
-    const { user, isLoading, isError, error } = useAuth();
     if (isLoading) return <h1>Loading User...</h1>;
     if (isError) return <h1>Error: {error?.message}</h1>;
     if (!user) return <h1>User not found.</h1>;
 
-    const { data: watchedEpisodes, isLoading: isLoadingWatchedEpisodes, isError: isErrorWatchedEpisodes, error: errorWatchedEpisodes } = useWatchedEpisodes(user.id, show.id);
     if (isLoadingWatchedEpisodes) return <h1>Loading Watched Episodes...</h1>;
     if (isErrorWatchedEpisodes) return <h1>Error: {errorWatchedEpisodes.message}</h1>;
     if (!watchedEpisodes) return <h1>Watched Episodes not found.</h1>;

@@ -1,3 +1,3 @@
-export { ShowComponent } from './ShowComponent';
-export { ShowDetails } from './ShowDetails';
-export { ShowModal } from './ShowModal';
+export { ShowComponent } from './ShowComponent/ShowComponent';
+export { ShowDetails } from './ShowDetails/ShowDetails';
+export { ShowModal } from './ShowModal/ShowModal';

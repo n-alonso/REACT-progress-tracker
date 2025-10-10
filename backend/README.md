@@ -19,6 +19,7 @@
 - **ORM**: Prisma
 - **Security**: Helmet, CORS
 - **Logging**: Winston (JSON format in production)
+- **Testing**: Jest + Supertest
 
 ## Project Structure
 
@@ -113,19 +114,7 @@ npm test -- shows.routes.test    # Run only shows routes tests
 
 #### View Coverage Report
 
-After running `npm run test:coverage`, open the report from `coverage/lcov-report/index.html` (Ie. In a browser).
-
-### Test Organization
-
-Tests are colocated with their source files in `__tests__/` directories:
-```
-src/features/shows/
-  ├── shows.routes.ts
-  ├── shows.service.ts
-  └── __tests__/
-      ├── shows.routes.test.ts
-      └── shows.service.test.ts
-```
+After running `npm run test:coverage`, open the report from `coverage/lcov-report/index.html`.
 
 ## Next Steps
 

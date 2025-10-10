@@ -1,3 +1,3 @@
-export * from "./useShows";
-export * from "./useUsers";
-export * from "./useWatchedEpisodes";
+export * from "./useShows/useShows";
+export * from "./useUsers/useUsers";
+export * from "./useWatchedEpisodes/useWatchedEpisodes";

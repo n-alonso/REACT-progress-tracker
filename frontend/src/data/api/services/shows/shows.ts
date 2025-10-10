@@ -1,5 +1,5 @@
-import { apiClient } from "../client";
-import type { Show } from "../..";
+import { apiClient } from "../../client";
+import type { Show } from "../../..";
 
 export const showsApi = {
     getAll: async (): Promise<Show[]> => {

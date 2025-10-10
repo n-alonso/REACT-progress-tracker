@@ -2,8 +2,8 @@ import { Card, Group, SimpleGrid, Text, TextInput } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { useState } from "react";
 
-import { ShowComponent, ShowModal } from "./components";
-import { type Show, useShows } from '../../data';
+import { ShowComponent, ShowModal } from "../components";
+import { type Show, useShows } from '../../../data';
 
 import styles from './ShowsPage.module.css';
 

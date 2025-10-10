@@ -74,6 +74,7 @@ Each folder has its own detailed README:
 - TanStack Query (data fetching)
 - Mantine (UI components)
 - React Router v7
+- Vitest + React Testing Library (testing)
 
 ### Backend
 - Node.js + TypeScript
@@ -112,7 +113,9 @@ See individual READMEs for more scripts (testing, building, database management,
 
 ## Testing
 
-Backend includes comprehensive test coverage with Jest:
+Both frontend and backend include comprehensive test coverage:
+
+### Backend Tests (Jest)
 
 ```bash
 cd backend
@@ -120,7 +123,14 @@ npm test                # Run all tests
 npm run test:coverage   # View coverage report
 ```
 
-Frontend testing is planned for future implementation.
+### Frontend Tests (Vitest)
+
+```bash
+cd frontend
+npm test                # Run all tests
+npm run test:ui         # Run tests with Vitest UI
+npm run test:coverage   # View coverage report
+```
 
 ## Next Steps
 

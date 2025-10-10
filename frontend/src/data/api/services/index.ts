@@ -1,5 +1,5 @@
-export * from "./health";
-export * from "./users";
-export * from "./shows";
-export * from "./watchedEpisodes";
+export * from "./health/health";
+export * from "./users/users";
+export * from "./shows/shows";
+export * from "./watchedEpisodes/watchedEpisodes";
 

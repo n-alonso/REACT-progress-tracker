@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { watchedEpisodesApi } from "../services";
+import { watchedEpisodesApi } from "../../services";
 
 export const useWatchedEpisodes = (userId: number, showId?: number) => {
     return useQuery({
