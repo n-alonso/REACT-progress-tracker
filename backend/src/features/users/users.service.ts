@@ -1,6 +1,5 @@
 import createError from 'http-errors';
 import { usersRepository } from './users.repository';
-import { User } from '@prisma/client';
 import { createLogger } from '../../utils/logger';
 
 const logger = createLogger('UsersService');

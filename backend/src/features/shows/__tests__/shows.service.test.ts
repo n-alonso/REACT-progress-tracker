@@ -1,5 +1,4 @@
 import { ShowsService } from '../shows.service';
-import { showsRepository } from '../shows.repository';
 import { prismaClient } from '../../../data';
 
 describe('ShowsService', () => {
