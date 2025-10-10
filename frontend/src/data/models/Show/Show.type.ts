@@ -1,4 +1,4 @@
-import type { Episode } from "./Episode.type";
+import type { Episode } from "../Episode/Episode.type";
 
 export type Show = {
   id: number,

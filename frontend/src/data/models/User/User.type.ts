@@ -1,4 +1,4 @@
-import type { WatchedEpisode } from "./WatchedEpisode.type";
+import type { WatchedEpisode } from "../WatchedEpisode/WatchedEpisode.type";
 
 export type User = {
   id: number,
