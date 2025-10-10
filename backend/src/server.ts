@@ -5,22 +5,22 @@ import cors from 'cors';
 import morgan from 'morgan';
 
 import { errorHandlerMiddleware, notFoundMiddleware } from './middlewares';
-import { healthRouter, showsRouter, usersRouter, watchedsRouter } from './features';
+import { healthRouter, showsRouter, usersRouter, watchedEpisodesRouter } from './features';
 import { createLogger } from './utils/logger';
 
 const logger = createLogger('Server');
 const app = express();
 
 // Validate Environment Variables
-if (!process.env.DATABASE_URL) {
-    logger.error('ERROR: DATABASE_URL environment variable is not set');
+if (!process.env.DATABASE_URL || !process.env.FRONTEND_URL) {
+    logger.error("ERROR: 'DATABASE_URL | FRONTEND_URL' environment variable is not set");
     process.exit(1);
 }
 
 // Middlewares
 app.use(helmet());
 app.use(cors({
-    origin: 'http://localhost:5173',
+    origin: process.env.FRONTEND_URL,
     credentials: true,
 }));
 app.use(morgan(process.env.NODE_ENV === 'production' ? 'combined' : 'dev'));
@@ -30,7 +30,7 @@ app.use(express.json());
 app.use('/health', healthRouter);
 app.use('/shows', showsRouter);
 app.use('/users', usersRouter);
-app.use('/watcheds', watchedsRouter);
+app.use('/watchedEpisodes', watchedEpisodesRouter);
 
 // Error Handling
 app.use('*', notFoundMiddleware);

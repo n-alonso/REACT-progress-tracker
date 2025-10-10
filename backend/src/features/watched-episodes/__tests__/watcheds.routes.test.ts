@@ -2,10 +2,10 @@ import request from 'supertest';
 import { app } from '../../../server';
 import { prismaClient } from '../../../data';
 
-describe('Watcheds Routes', () => {
-    describe('GET /watcheds', () => {
+describe('WatchedEpisodes Routes', () => {
+    describe('GET /watchedEpisodes', () => {
         it('should return 400 when userId query param is missing', async () => {
-            const response = await request(app).get('/watcheds');
+            const response = await request(app).get('/watchedEpisodes');
 
             expect(response.status).toBe(400);
             expect(response.body).toMatchObject({
@@ -19,7 +19,7 @@ describe('Watcheds Routes', () => {
                 data: { username: 'user_with_no_progress' },
             });
 
-            const response = await request(app).get(`/watcheds?userId=${user.id}`);
+            const response = await request(app).get(`/watchedEpisodes?userId=${user.id}`);
 
             expect(response.status).toBe(200);
             expect(response.body).toEqual([]);
@@ -62,7 +62,7 @@ describe('Watcheds Routes', () => {
                 ],
             });
 
-            const response = await request(app).get(`/watcheds?userId=${user.id}`);
+            const response = await request(app).get(`/watchedEpisodes?userId=${user.id}`);
 
             expect(response.status).toBe(200);
             expect(response.body).toHaveLength(2);
@@ -127,7 +127,7 @@ describe('Watcheds Routes', () => {
 
             // Query for only show1
             const response = await request(app).get(
-                `/watcheds?userId=${user.id}&showId=${show1.id}`
+                `/watchedEpisodes?userId=${user.id}&showId=${show1.id}`
             );
 
             expect(response.status).toBe(200);
@@ -139,7 +139,7 @@ describe('Watcheds Routes', () => {
         });
 
         it('should return 400 when userId is invalid', async () => {
-            const response = await request(app).get('/watcheds?userId=invalid');
+            const response = await request(app).get('/watchedEpisodes?userId=invalid');
 
             expect(response.status).toBe(400);
             expect(response.body).toMatchObject({
@@ -150,7 +150,7 @@ describe('Watcheds Routes', () => {
 
         it('should return 400 when showId is invalid', async () => {
             const response = await request(app).get(
-                '/watcheds?userId=1&showId=invalid'
+                '/watchedEpisodes?userId=1&showId=invalid'
             );
 
             expect(response.status).toBe(400);

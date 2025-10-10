@@ -1,7 +1,10 @@
+import { Show, Episode } from '@prisma/client';
 import { prismaClient } from '../../data';
 
+type ShowWithEpisodes = Show & { episodes: Episode[] };
+
 export class ShowsRepository {
-    async findAll() {
+    async findAll(): Promise<ShowWithEpisodes[]> {
         return await prismaClient.show.findMany({
             include: {
                 episodes: true,
@@ -9,7 +12,7 @@ export class ShowsRepository {
         });
     }
 
-    async findById(id: number) {
+    async findById(id: number): Promise<ShowWithEpisodes | null> {
         return await prismaClient.show.findFirst({
             where: { id },
             include: {

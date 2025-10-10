@@ -6,7 +6,7 @@ export const watchedEpisodesApi = {
         const params = new URLSearchParams({ userId: userId.toString() });
         if (showId) params.append('showId', showId.toString());
 
-        const { data } = await apiClient.get(`/watcheds?${params}`);
+        const { data } = await apiClient.get(`/watchedEpisodes?${params}`);
         return data;
     },
 };

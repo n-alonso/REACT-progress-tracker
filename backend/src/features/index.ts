@@ -1,5 +1,5 @@
 export { showsRouter } from './shows';
 export { usersRouter } from './users';
-export { watchedsRouter } from './watcheds';
+export { watchedEpisodesRouter } from './watched-episodes';
 export { healthRouter } from './health';
 

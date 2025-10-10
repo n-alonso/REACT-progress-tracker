@@ -1,6 +1,6 @@
 import { Router, Request, Response, NextFunction } from 'express';
 import createError from 'http-errors';
-import { watchedsService } from './watcheds.service';
+import { watchedEpisodesService } from './watchedEpisodes.service';
 
 const router = Router();
 
@@ -14,12 +14,11 @@ router.get('/', async (req: Request, res: Response, next: NextFunction) => {
         const userId = Number(req.query.userId);
         const showId = req.query.showId ? Number(req.query.showId) : undefined;
 
-        const watcheds = await watchedsService.getWatchedsByUser(userId, showId);
-        res.json(watcheds);
+        const watchedEpisodes = await watchedEpisodesService.getWatchedEpisodesByUser(userId, showId);
+        res.json(watchedEpisodes);
     } catch (error) {
         next(error);
     }
 });
 
-export { router as watchedsRouter };
-
+export { router as watchedEpisodesRouter };

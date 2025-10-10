@@ -1,30 +1,30 @@
-import { WatchedsService } from '../watcheds.service';
+import { WatchedEpisodesRepository } from '../watchedEpisodes.repository';
 import { prismaClient } from '../../../data';
 
-describe('WatchedsService', () => {
-    let watchedsService: WatchedsService;
+describe('WatchedEpisodesRepository', () => {
+    let watchedEpisodesRepository: WatchedEpisodesRepository;
 
     beforeEach(() => {
-        watchedsService = new WatchedsService();
+        watchedEpisodesRepository = new WatchedEpisodesRepository();
     });
 
-    describe('getWatchedsByUser', () => {
+    describe('findByUserId', () => {
         it('should return watched episodes for a user', async () => {
             const user = await prismaClient.user.create({
-                data: { username: 'test_user' },
+                data: { username: 'repo_test_user' },
             });
 
             const show = await prismaClient.show.create({
                 data: {
-                    title: 'Test Show',
+                    title: 'Repo Test Show',
                     episodes: {
-                        create: [{ title: 'Episode 1' }, { title: 'Episode 2' }],
+                        create: [{ title: 'Episode 1' }],
                     },
                 },
                 include: { episodes: true },
             });
 
-            await prismaClient.watchedEpisode.create({
+            const createdWatched = await prismaClient.watchedEpisode.create({
                 data: {
                     userId: user.id,
                     showId: show.id,
@@ -32,24 +32,24 @@ describe('WatchedsService', () => {
                 },
             });
 
-            const watcheds = await watchedsService.getWatchedsByUser(user.id);
+            const watcheds = await watchedEpisodesRepository.findByUserId(user.id);
 
             expect(watcheds).toHaveLength(1);
             expect(watcheds[0]).toMatchObject({
+                id: createdWatched.id,
                 userId: user.id,
                 showId: show.id,
-                episodeId: show.episodes[0].id,
             });
         });
 
         it('should filter by showId when provided', async () => {
             const user = await prismaClient.user.create({
-                data: { username: 'filter_test_user' },
+                data: { username: 'filter_repo_user' },
             });
 
             const show1 = await prismaClient.show.create({
                 data: {
-                    title: 'Show 1',
+                    title: 'Show A',
                     episodes: {
                         create: [{ title: 'Episode 1' }],
                     },
@@ -59,7 +59,7 @@ describe('WatchedsService', () => {
 
             const show2 = await prismaClient.show.create({
                 data: {
-                    title: 'Show 2',
+                    title: 'Show B',
                     episodes: {
                         create: [{ title: 'Episode 1' }],
                     },
@@ -82,10 +82,7 @@ describe('WatchedsService', () => {
                 ],
             });
 
-            const watcheds = await watchedsService.getWatchedsByUser(
-                user.id,
-                show1.id
-            );
+            const watcheds = await watchedEpisodesRepository.findByUserId(user.id, show1.id);
 
             expect(watcheds).toHaveLength(1);
             expect(watcheds[0].showId).toBe(show1.id);
@@ -93,30 +90,22 @@ describe('WatchedsService', () => {
 
         it('should return empty array when user has no watched episodes', async () => {
             const user = await prismaClient.user.create({
-                data: { username: 'no_progress_user' },
+                data: { username: 'empty_repo_user' },
             });
 
-            const watcheds = await watchedsService.getWatchedsByUser(user.id);
+            const watcheds = await watchedEpisodesRepository.findByUserId(user.id);
 
             expect(watcheds).toEqual([]);
         });
 
-        it('should throw BadRequest error when userId is NaN', async () => {
-            await expect(
-                watchedsService.getWatchedsByUser(NaN)
-            ).rejects.toMatchObject({
-                status: 400,
-                message: 'Invalid user ID.',
+        it('should return empty array when filtering by non-existent showId', async () => {
+            const user = await prismaClient.user.create({
+                data: { username: 'nonexistent_show_user' },
             });
-        });
 
-        it('should throw BadRequest error when showId is NaN', async () => {
-            await expect(
-                watchedsService.getWatchedsByUser(1, NaN)
-            ).rejects.toMatchObject({
-                status: 400,
-                message: 'Invalid show ID.',
-            });
+            const watcheds = await watchedEpisodesRepository.findByUserId(user.id, 9999);
+
+            expect(watcheds).toEqual([]);
         });
     });
 });
