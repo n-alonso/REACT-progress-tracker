@@ -7,6 +7,10 @@ jobs:
   backend:
     name: Backend (Lint, Build, Test)
     runs-on: ubuntu-latest
+    env:
+      DATABASE_URL: ${{ vars.DATABASE_URL }}
+      FRONTEND_URL: ${{ vars.FRONTEND_URL }}
+      PORT: ${{ vars.PORT }}
 
     steps:
       - name: Checkout code
@@ -42,6 +46,8 @@ jobs:
   frontend:
     name: Frontend (Lint, Build, Test)
     runs-on: ubuntu-latest
+    env:
+      VITE_API_URL: ${{ vars.VITE_API_URL }}
 
     steps:
       - name: Checkout code
