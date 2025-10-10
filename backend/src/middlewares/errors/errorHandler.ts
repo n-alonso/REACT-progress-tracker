@@ -3,7 +3,7 @@ import { createLogger } from '../../utils/logger';
 
 const logger = createLogger('ErrorHandler');
 
-export function errorHandlerMiddleware(err: any, req: Request, res: Response, next: NextFunction): void {
+export function errorHandlerMiddleware(err: any, req: Request, res: Response, _next: NextFunction): void {
     logger.error('Unhandled error', err instanceof Error ? err : { message: String(err) });
 
     // Extract status and message from http-errors or default to 500
