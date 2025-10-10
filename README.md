@@ -1,16 +1,26 @@
 # Progress Tracker
 
+[![CI/CD Pipeline Status](https://github.com/n-alonso/REACT-progress-tracker/actions/workflows/ci-pipeline.yml/badge.svg)](https://github.com/n-alonso/REACT-progress-tracker/actions/workflows/ci-pipeline.yml)
+
 A full-stack TV show progress tracking application built with React and Express. Track your watched episodes across multiple shows with an intuitive interface.
 
 ## Table of Contents
 
 - [Quick Start](#quick-start)
 - [Project Structure](#project-structure)
-- [Tech Stack](#tech-stack)
-- [Architecture](#architecture)
+- [Frontend](#frontend)
+  - [Documentation](#frontend-documentation)
+  - [Tech Stack](#frontend-tech-stack)
+  - [Architecture](#frontend-architecture)
+- [Backend](#backend)
+  - [Documentation](#backend-documentation)
+  - [Tech Stack](#backend-tech-stack)
+  - [Architecture](#backend-architecture)
+- [DevOps](#devops)
+  - [Tech Stack](#devops-tech-stack)
+  - [Architecture](#devops-architecture)
 - [Available Scripts](#available-scripts)
 - [Development Workflow](#development-workflow)
-- [Testing](#testing)
 - [Next Steps](#next-steps)
 
 ## Quick Start
@@ -57,40 +67,69 @@ This is a monorepo containing:
 
 ```
 progress-tracker/
-├── frontend/          # React application (port 5173)
-├── backend/           # Express API (port 3000)
-└── package.json       # Root scripts for running both services
+├── .github/
+│   └── workflows/
+│       └── ci-pipeline.yml  # GitHub Actions (CI)
+├── frontend/                # React application (port 5173)
+├── backend/                 # Express API (port 3000)
+└── package.json             # Root scripts for running both services
 ```
 
-Each folder has its own detailed README:
-- [Frontend Documentation](./frontend/README.md)
-- [Backend Documentation](./backend/README.md)
+## Frontend
 
-## Tech Stack
+### Frontend Documentation
 
-### Frontend
+**[Full Frontend Documentation](./frontend/README.md)**
+
+### Frontend Tech Stack
+
 - React 19 + TypeScript
 - Vite (build tool)
 - TanStack Query (data fetching)
 - Mantine (UI components)
 - React Router v7
 - Vitest + React Testing Library (testing)
+- ESLint (code linting)
 
-### Backend
+### Frontend Architecture
+
+Feature-based architecture with pages, components, and a dedicated data layer (API services + React Query hooks).
+
+Related files (component, styles, tests) are grouped in dedicated folders for better organization.
+
+## Backend
+
+### Backend Documentation
+
+**[Full Backend Documentation](./backend/README.md)**
+
+### Backend Tech Stack
+
 - Node.js + TypeScript
 - Express (REST API)
 - Prisma ORM
 - SQLite (development database)
 - Winston (logging)
 - Jest + Supertest (testing)
+- ESLint (code linting)
 
-## Architecture
+### Backend Architecture
 
-**Frontend**: Feature-based architecture with pages, components, and a dedicated data layer (API services + React Query hooks).
+Feature-based architecture with layered components (routes → services → repositories) grouped per feature.
 
-**Backend**: Feature-based architecture with layered components (routes → services → repositories) grouped per feature.
+**Database**: With migrations and pre-seeded with 3 users, 15 shows, and 951 episodes to test with.
 
-**Database**: With migrations and Pre-seeded with 3 users, 15 shows, and 951 episodes to test with.
+## DevOps
+
+### DevOps Tech Stack
+
+- **GitHub Actions** - CI/CD pipelines
+
+
+### DevOps Architecture
+
+**CI Pipeline**: Parallel execution of frontend and backend jobs (lint, build, test) on every push.
+
 
 ## Available Scripts
 
@@ -111,29 +150,8 @@ See individual READMEs for more scripts (testing, building, database management,
 3. Frontend is pre-configured to communicate with the backend
 4. Database is automatically seeded on first run
 
-## Testing
-
-Both frontend and backend include comprehensive test coverage:
-
-### Backend Tests (Jest)
-
-```bash
-cd backend
-npm test                # Run all tests
-npm run test:coverage   # View coverage report
-```
-
-### Frontend Tests (Vitest)
-
-```bash
-cd frontend
-npm test                # Run all tests
-npm run test:ui         # Run tests with Vitest UI
-npm run test:coverage   # View coverage report
-```
-
 ## Next Steps
 
-- Adding CI/CD pipelines
+- Adding a CD pipeline
 - Adding IaC
 - See frontend/backend documentation for their related next steps

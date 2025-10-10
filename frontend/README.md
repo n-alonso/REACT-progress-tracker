@@ -26,7 +26,7 @@
 
 ```
 frontend/src/
-├── pages/                    # Page components
+├── pages/                   # Page components
 │   ├── home/                # Home page
 │   ├── profile/             # User profile page
 │   ├── shows/               # Shows listing & details
@@ -92,9 +92,10 @@ Tests are implemented with Vitest and React Testing Library.
 ### Running Tests
 
 ```bash
-npm test                 # Run all tests
+npm test                # Run all tests on watch mode
 npm run test:ui         # Run tests with Vitest UI
 npm run test:coverage   # Run tests with coverage report
+npm run test:ci         # Run all tests and exit process
 ```
 
 For Specific Features:
